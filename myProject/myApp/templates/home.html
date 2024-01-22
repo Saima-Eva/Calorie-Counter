@@ -1,0 +1,34 @@
+{% extends "base.html" %} 
+
+
+
+{% block title %} Home Page {% endblock title %}
+{% block content %}
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Item Name</th>
+        <th scope="col">calories_consumed</th>
+        <th scope="col">created_at</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% if items %}
+      {% for item in items %}
+      <tr>
+        <th >{{ item.item_name }}</th>
+        <td>{{ item.calories_consumed }}</td>
+        <td>{{ item.created_at }}</td>
+        <td>
+            <a class="btn btn-primary" href="{% url 'update_item' item.id %}" role="button">Update</a>
+            <a class="btn btn-danger" href="{% url 'delete_item' item.id %}" role="button">Delete</a>
+        </td>
+        {% endfor %}
+  {% else %}
+    <p>No consumed items yet.</p>
+  {% endif %}
+      </tr>
+    </tbody>
+  </table>
+{% endblock content %}

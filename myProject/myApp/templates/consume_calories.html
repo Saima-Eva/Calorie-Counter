@@ -1,0 +1,18 @@
+{% extends "base.html" %} 
+
+
+
+{% block title %} Home Page {% endblock title %}
+{% block content %}
+<div class="m-3">
+    <h1 class="pt-1 text-center">Consumed Calories Form</h1>
+    <div class="container">
+        <form action="" method="post">
+            {% csrf_token %}
+            
+            {{form.as_p}}
+            <button type="submit">submit</button>
+        </form>
+       
+    </div>
+{% endblock content %}

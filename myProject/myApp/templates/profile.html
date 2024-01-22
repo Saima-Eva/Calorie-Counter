@@ -1,0 +1,73 @@
+
+
+  {% extends "base.html" %} 
+
+
+
+{% block title %} Profile Page {% endblock title %}
+{% block content %}
+<div class="card text-center" style="width: 30rem;">
+    
+    <div class="card-body">
+
+      <h5 class="card-title">Username: {{user_d.username}}</h5>
+      <h5 class="card-title">Email: {{user_d.email}}</h5>
+      {% if obj %}
+      <h5 class="card-title">Name: {{obj.name}}</h5>
+      <h5 class="card-title">Gender: {{obj.gender}}</h5>
+      <h5 class="card-title">Height: {{obj.height}} cm</h5>
+      <h5 class="card-title">Weight: {{obj.weight}} kg</h5>
+      <h5 class="card-title">Required Calory: {{BMR}} kal</h5>
+      <form action="" method="post">
+        {% csrf_token %}
+        <input type="date" id="start" name="date" />
+        <button type="submit">submit</button>
+    </form>
+          {% if data is not None %}
+          <h5 class="card-title">Date: {{data}}</h5>
+          <h5 class="card-title">Calory consumed today: {{calory}}</h5>
+          {% if need > 0 %}
+          <h5 class="card-title">Have to Consume: {{need}}</h5>
+          {% else %}
+          <h5 class="card-title">Over Consume: {{ need }}</h5>
+          {% endif %}
+          {% endif %}
+
+      {% endif %}
+
+      
+      <a href="{% url 'user_profile_update' %}" class="btn btn-primary mt-2">Update Profile</a>
+    </div>
+  </div>
+
+  <div class="container mt-3"> 
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Item Name</th>
+          <th scope="col">calories_consumed</th>
+          <th scope="col">created_at</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% if items %}
+        {% for item in items %}
+        <tr>
+          <th >{{ item.item_name }}</th>
+          <td>{{ item.calories_consumed }}</td>
+          <td>{{ item.created_at }}</td>
+          <td>
+              <a class="btn btn-primary" href="{% url 'update_item' item.id %}" role="button">Update</a>
+              <a class="btn btn-danger" href="{% url 'delete_item' item.id %}" role="button">Delete</a>
+          </td>
+          {% endfor %}
+    {% else %}
+      <p>No consumed items yet.</p>
+    {% endif %}
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+{% endblock content %}
