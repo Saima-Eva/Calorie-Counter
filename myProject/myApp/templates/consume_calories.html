@@ -1,18 +1,16 @@
 {% extends "base.html" %} 
 
-
-
 {% block title %} Home Page {% endblock title %}
 {% block content %}
 <div class="m-3">
-    <h1 class="pt-1 text-center">Consumed Calories Form</h1>
-    <div class="container">
+    <h1 class="pt-1 text-center" style="font-family: 'Arial', sans-serif; color: #333;">Consumed Calories Form</h1>
+    <div class="container" style="max-width: 400px; margin: 0 auto; background-color: #f8f9fa; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
         <form action="" method="post">
             {% csrf_token %}
             
             {{form.as_p}}
-            <button type="submit">submit</button>
+            <button type="submit" class="btn btn-primary mt-3" style="width: 100%;">Submit</button>
         </form>
-       
     </div>
+</div>
 {% endblock content %}

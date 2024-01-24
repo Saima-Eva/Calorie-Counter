@@ -1,12 +1,8 @@
-
-
-  {% extends "base.html" %} 
-
-
+{% extends "base.html" %} 
 
 {% block title %} Profile Page {% endblock title %}
 {% block content %}
-<div class="card text-center" style="width: 30rem;">
+<div class="card text-center" style="width: 30rem; margin: 20px auto; background-color: #f5f5f5; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
     
     <div class="card-body">
 
@@ -18,10 +14,10 @@
       <h5 class="card-title">Height: {{obj.height}} cm</h5>
       <h5 class="card-title">Weight: {{obj.weight}} kg</h5>
       <h5 class="card-title">Required Calory: {{BMR}} kal</h5>
-      <form action="" method="post">
+      <form action="" method="post" style="margin-top: 20px;">
         {% csrf_token %}
         <input type="date" id="start" name="date" />
-        <button type="submit">submit</button>
+        <button type="submit" class="btn btn-primary">Submit</button>
     </form>
           {% if data is not None %}
           <h5 class="card-title">Date: {{data}}</h5>
@@ -45,8 +41,8 @@
       <thead>
         <tr>
           <th scope="col">Item Name</th>
-          <th scope="col">calories_consumed</th>
-          <th scope="col">created_at</th>
+          <th scope="col">Calories Consumed</th>
+          <th scope="col">Created At</th>
           <th scope="col">Actions</th>
         </tr>
       </thead>
@@ -54,18 +50,20 @@
       {% if items %}
         {% for item in items %}
         <tr>
-          <th >{{ item.item_name }}</th>
+          <th>{{ item.item_name }}</th>
           <td>{{ item.calories_consumed }}</td>
           <td>{{ item.created_at }}</td>
           <td>
               <a class="btn btn-primary" href="{% url 'update_item' item.id %}" role="button">Update</a>
               <a class="btn btn-danger" href="{% url 'delete_item' item.id %}" role="button">Delete</a>
           </td>
-          {% endfor %}
-    {% else %}
-      <p>No consumed items yet.</p>
-    {% endif %}
         </tr>
+        {% endfor %}
+      {% else %}
+        <tr>
+          <td colspan="4">No consumed items yet.</td>
+        </tr>
+      {% endif %}
       </tbody>
     </table>
   </div>
